@@ -8,11 +8,5 @@ def index_range(page: int, page_size: int) -> tuple:
     defined by page and page_size
     """
 
-    count = 0
-    idx = 0
-    while True:
-        if idx != 0 and idx % page_size == 0:
-            count = count + 1
-            if count == page:
-                return (idx - page_size, idx)
-        idx = idx + 1
+    nextSartPageIndex = page * page_size
+    return nextSartPageIndex - page_size, nextSartPageIndex
