@@ -51,15 +51,9 @@ class Server:
             total_pages = math.floor(len(data) / page_size)
         else:
             total_pages = math.floor(len(data) / page_size) + 1
-        if page - 1 != 0:
-            prev_page = page - 1
-        else:
-            prev_page = None
 
-        if page + 1 > total_pages:
-            next_page = None
-        else:
-            next_page = page + 1
+        prev_page = page - 1 if page - 1 != 0 else None
+        next_page = page + 1 if page + 1 <= total_pages else None
 
         return {
             "page_size": page_size,
