@@ -27,3 +27,9 @@ class LIFOCache(BaseCaching):
                     self.cache_data[key] = item
                     LIFOCache.track_key.append(key)
                     print(f"DISCARD: {last_key}")
+
+    def get(self, key):
+        """ Gets a value from cache """
+        if key is None or key not in self.cache_data.keys():
+            return None
+        return self.cache_data[key]
