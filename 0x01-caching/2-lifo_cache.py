@@ -13,7 +13,7 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         """ Adds an item to cache """
-        if key or item:
+        if key and item:
             if len(self.cache_data) < BaseCaching.MAX_ITEMS:
                 self.cache_data[key] = item
                 LIFOCache.track_key.append(key)
