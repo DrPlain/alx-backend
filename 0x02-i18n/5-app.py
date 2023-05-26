@@ -23,8 +23,10 @@ users = {
 
 app = Flask(__name__)
 app.config.from_object(Config)
+babel = Babel(app)
 
 
+@babel.localeselector
 def get_locale():
     """ Get locale from request """
     locale = request.args.get('locale', '').strip()
@@ -55,8 +57,8 @@ def before_request():
     if user:
         g.user = user
 
+# babel = Babel(app, locale_selector=get_locale)
 
-babel = Babel(app, locale_selector=get_locale)
 
 if __name__ == "__main__":
     app.run()
