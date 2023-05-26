@@ -53,7 +53,6 @@ def get_user() -> Union[Dict, None]:
 @app.before_request
 def before_request():
     user = get_user()
-    print(user)
     if user:
         g.user = user
 
