@@ -47,16 +47,12 @@ def get_user():
     if ID:
         if ID.isnumeric():
             return users.get(int(ID), None)
-    return None
 
 
 @app.before_request
 def before_request():
+    """ Executed before any other function in a request
+    context
+    """
     user = get_user()
     g.user = user
-
-# babel = Babel(app, locale_selector=get_locale)
-
-
-if __name__ == "__main__":
-    app.run()
