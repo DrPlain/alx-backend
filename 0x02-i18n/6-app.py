@@ -4,7 +4,6 @@ Basic flask app
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
-from typing import Dict, Union
 
 
 class Config:
@@ -23,8 +22,10 @@ users = {
 
 app = Flask(__name__)
 app.config.from_object(Config)
+babel = Babel(app)
 
 
+@app.localeselector
 def get_locale():
     """ Get locale from request """
 
@@ -51,7 +52,7 @@ def home():
     return render_template('6-index.html')
 
 
-def get_user() -> Union[Dict, None]:
+def get_user():
     """ Returns a user dict or None if the ID cannot be found
     ID ==  url value of login_as param"""
     ID = request.args.get('login_as', None)
@@ -62,13 +63,16 @@ def get_user() -> Union[Dict, None]:
 
 @app.before_request
 def before_request():
+    """ Executes before other functions in a request
+    context
+    """
     user = get_user()
     print(user)
     if user:
         g.user = user
 
+# babel = Babel(app, locale_selector=get_locale)
 
-babel = Babel(app, locale_selector=get_locale)
 
 if __name__ == "__main__":
     app.run()
