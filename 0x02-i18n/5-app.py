@@ -47,13 +47,13 @@ def get_user():
     if ID:
         if ID.isnumeric():
             return users.get(int(ID), None)
+    return None
 
 
 @app.before_request
 def before_request():
     user = get_user()
-    if user:
-        g.user = user
+    g.user = user
 
 # babel = Babel(app, locale_selector=get_locale)
 
