@@ -7,8 +7,8 @@ describe("createPushNotificationsJobs", () => {
   const queue = createQueue({ name: "push_notification_code_test" });
 
   before(() => {
-    queue.testMode.enter(true);
-    // queue.testMode.clear();
+    queue.testMode.enter();
+    queue.testMode.clear();
   });
 
   after(() => {
